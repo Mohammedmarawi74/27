@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { SlideData } from '../types';
 import { ICONS } from '../constants';
-import { Phone, Globe } from 'lucide-react';
+import { Phone, Globe, Image as ImageIcon } from 'lucide-react';
 
 interface Props {
   data: SlideData;
@@ -33,38 +33,31 @@ const SlidePreview: React.FC<Props> = ({ data }) => {
             ${data.customCss || ''}
           }
           .${slideId} .poster-title {
-            font-size: 22px !important;
-            line-height: 1.2 !important;
-            font-weight: 900 !important;
+            font-size: 20px !important;
+            font-weight: 800 !important;
             color: ${data.colors.primary} !important;
           }
           .${slideId} .poster-subtitle {
-            font-size: 13px !important;
-            line-height: 1.4 !important;
-            font-weight: 500 !important;
+            font-size: 11px !important;
+            font-weight: 600 !important;
             color: ${data.colors.secondary} !important;
           }
           .${slideId} .poster-objective-text {
-            font-size: 13px !important;
-            line-height: 1.5 !important;
-            font-weight: 500 !important;
             color: ${data.colors.text} !important;
+            font-weight: 600 !important;
           }
           .${slideId} .poster-objective-icon {
-            border-color: ${data.colors.secondary}33 !important;
+            border-color: ${data.colors.secondary}40 !important;
             color: ${data.colors.secondary} !important;
-            background-color: ${data.colors.secondary}05 !important;
-            width: 2rem !important;
-            height: 2rem !important;
+            background-color: ${data.colors.secondary}20 !important;
           }
           .${slideId} .poster-badge {
             font-weight: 700 !important;
-            font-size: 11px !important;
             background-color: ${data.colors.secondary} !important;
           }
-          .${slideId} .poster-footer {
-            border-top: 1px solid ${data.colors.primary}22 !important;
-            color: ${data.colors.primary} !important;
+          .${slideId} .poster-footer-phone-icon {
+            border-color: ${data.colors.secondary}30 !important;
+            background-color: ${data.colors.secondary}15 !important;
           }
           .${slideId} .poster-footer-right {
              background-color: ${data.colors.primary} !important;
@@ -82,14 +75,6 @@ const SlidePreview: React.FC<Props> = ({ data }) => {
             crossOrigin="anonymous"
             onError={handleImageError}
           />
-        ) : data.logo && imageError ? (
-           <div className="fallback-icon flex items-center justify-center w-full h-full bg-gray-100 text-gray-400">
-             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-               <circle cx="8.5" cy="8.5" r="1.5"></circle>
-               <polyline points="21 15 16 10 5 21"></polyline>
-             </svg>
-           </div>
         ) : null}
       </div>
 
@@ -116,14 +101,16 @@ const SlidePreview: React.FC<Props> = ({ data }) => {
         </div>
         
         {/* Floating Badge */}
-        <div className="poster-badge-container">
-          <div className="poster-badge">
-            {data.badgeText}
+        {data.badgeText && (
+          <div className="poster-badge-container">
+            <div className="poster-badge">
+              {data.badgeText}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
-      {/* Objectives Section - This now has more space due to the 2/3 ratio */}
+      {/* Objectives Section Grid */}
       <div className="poster-objectives">
         <div className="poster-objectives-grid">
           {data.objectives.map((obj) => (
@@ -141,29 +128,15 @@ const SlidePreview: React.FC<Props> = ({ data }) => {
         </div>
       </div>
 
-      {/* Footer - Pushed to absolute bottom with mt-auto */}
-      <div className="poster-footer">
-        <div className="poster-footer-wrapper">
-          <div className="poster-footer-left">
-            <span>{data.footer.handle}</span>
-            <span className="poster-footer-dot" style={{ backgroundColor: data.colors.text }}></span>
-            <div className="poster-footer-phone-icon">
-              <Phone style={{ color: data.colors.secondary }} />
-            </div>
-            <span>{data.footer.phone}</span>
-          </div>
-        </div>
-        <div className="poster-footer-right">
-            <Globe />
-            <span>{data.footer.website}</span>
-        </div>
-      </div>
+
 
       {/* Design Footer - 5px high line with text above it */}
       <div className="design-footer-container">
-        <div className="design-footer-text-row">
-          <span>al_investor.com</span>
-          <span>منصة المستثمر</span>
+        <div className="design-footer-text-row" style={{ color: data.colors.text }}>
+          {/* RTL -> Right side first */}
+          <span style={{ fontWeight: 800 }}>منصة المستثمر الاقتصادية</span>
+          {/* RTL -> Left side second */}
+          <span style={{ direction: 'ltr', display: 'inline-block' }}>al-investor.com</span>
         </div>
         <div className="design-footer-line" style={{ backgroundColor: data.colors.primary }}></div>
       </div>

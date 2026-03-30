@@ -5,7 +5,7 @@ import { DEFAULT_SLIDE, ICONS } from './constants';
 import SlidePreview from './components/SlidePreview';
 import EditorPanel from './components/EditorPanel';
 import { Plus, Trash2, Download, Copy, Layout } from 'lucide-react';
-import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 
 const App: React.FC = () => {
   const [slides, setSlides] = useState<SlideData[]>([{ ...DEFAULT_SLIDE, id: Date.now().toString() }]);
@@ -43,15 +43,21 @@ const App: React.FC = () => {
 
   const downloadImage = async () => {
     if (!previewRef.current) return;
-    const canvas = await html2canvas(previewRef.current, {
-      scale: 3,
-      useCORS: true,
-      backgroundColor: '#ffffff',
-    });
-    const link = document.createElement('a');
-    link.download = `carousel-slide-${activeSlideIndex + 1}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+    
+    try {
+      const dataUrl = await toPng(previewRef.current, {
+        cacheBust: true,
+        pixelRatio: 3,
+        backgroundColor: activeSlide.colors.background || '#ffffff',
+      });
+      
+      const link = document.createElement('a');
+      link.download = `carousel-slide-${activeSlideIndex + 1}.png`;
+      link.href = dataUrl;
+      link.click();
+    } catch (err) {
+      console.error('oops, something went wrong!', err);
+    }
   };
 
   return (

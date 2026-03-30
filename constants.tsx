@@ -29,13 +29,13 @@ export const ICONS: Record<string, React.ReactNode> = {
 };
 
 export const COLOR_THEMES = [
-  { name: 'كحلي المستثمر', primary: '#0ea5e9', secondary: '#0f172a', background: '#f8fafc', text: '#1e293b' },
+  { name: 'كحلي المستثمر', primary: '#0ea5e9', secondary: '#0369a1', background: '#ffffff', text: '#0f172a' },
   { name: 'الأحمر الصيفي', primary: '#dc2626', secondary: '#facc15', background: '#fefce8', text: '#7f1d1d' },
   { name: 'فوشيا التحليل', primary: '#c026d3', secondary: '#3b82f6', background: '#eff6ff', text: '#1e293b' },
   { name: 'سيان الابتكار', primary: '#0891b2', secondary: '#0f172a', background: '#ffffff', text: '#0f172a' },
   { name: 'لايم النمو', primary: '#65a30d', secondary: '#3b82f6', background: '#eff6ff', text: '#1a2e05' },
   { name: 'برتقالي الحركة', primary: '#f97316', secondary: '#fb923c', background: '#fff7ed', text: '#7c2d12' },
-  { name: 'الوضع الداكن', primary: '#2dd4bf', secondary: '#1e293b', background: '#0f172a', text: '#e2e8f0' },
+  { name: 'الوضع الداكن', primary: '#2dd4bf', secondary: '#34d399', background: '#0f172a', text: '#f8fafc' },
   { name: 'بنفسجي العمق', primary: '#7c3aed', secondary: '#3b82f6', background: '#f5f3ff', text: '#1e1b4b' },
 ];
 
